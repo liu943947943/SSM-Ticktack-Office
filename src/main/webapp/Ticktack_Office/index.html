@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>滴答办公系统-主页</title>
+    <link rel="stylesheet" href="media/layui/css/layui.css" media="all">
+    <!-- <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css"> -->
+    <link rel="stylesheet" href="media/css/app.css" media="all">
+    <link rel="stylesheet" href="media/css/font-awesome.min.css">
+    <style type="text/css">
+        iframe{
+            width: 98%;
+            height: 98%;
+        }
+        .layui-tab-item{
+            height: 98%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="layui-layout layui-layout-admin kit-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">
+            <img src="media/images/qf_logo.png" style="margin-right: 10px" /><span
+                style="font-size: 22px">滴答办公系统</span>
+        </div>
+
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item kit-side-fold" lay-unselect >
+                <a href="javascript:flexible();" title="侧边伸缩">
+                    <i class="layui-icon layui-icon-shrink-right" id="LAY_flexible"></i>
+                </a>
+
+            </li>
+            <li class="layui-nav-item" lay-unselect>
+                <a href="index.html" layadmin-event="refresh" title="刷新">
+                    <i class="layui-icon layui-icon-refresh-3"></i>
+                </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <input type="text" placeholder="搜索..." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords=">
+            </li>
+
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item" style="margin-right: 20px">
+                <a href="javascript:showTab(1001,'processlist.html','待办事项');">待办事项<span class="layui-badge">99+</span></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="media/images/qf_logo.png" class="layui-nav-img">
+                  	 你最帥
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:showTab(1001,'user.html','我的信息');">我的信息</a></dd>
+                    <dd><a href="javascript:showTab(1001,'user.html','更改头像');">更改头像</a></dd>
+                    <dd><a href="javascript:showTab(1002,'user.html','修改密码');">修改密码</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="userloginout.do">注销</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black ">
+        <div class="layui-side-scroll">
+
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul id="dvmenu" class="layui-nav layui-nav-tree"  lay-shrink="all" id="lm">
+            
+				<li class="layui-nav-item layui-nav-itemed" v-for="fm in root">
+						<a class="" href="javascript:;"> <i :class="fm.aicon"></i><label style="color:#009671;">{{fm.title}}</label>
+						</a>
+						
+						<dl class="layui-nav-child" >
+							<dd v-for="sm in fm.childs">
+								<a href="javascript:;" @click="changeTab(sm.id, sm.aurl,sm.title)">{{sm.title}}</a>
+							</dd>
+						</dl>
+					</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="layui-body" id="container" >
+        <!-- 内容主体区域 -->
+        <div class="layui-tab" lay-filter="demo" lay-allowclose="true" style="width: 100%;height: 90%">
+            <ul class="layui-tab-title">
+            </ul>
+            <div class="layui-tab-content" style="width: 99%;height: 98%"></div>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <p>
+            Copyright 2011-2018 <a href="http://www.1000phone.com/"
+                                   rel="nofollow" target="_blank" title="千锋互联">北京滴答科技有限公司 Feri
+            版权所有</a> 京ICP备12003911号-3 京公网安备11010802011455号
+        </p>
+    </div>
+</div>
+
+<script src="media/js/jquery.min.js"></script>
+<script src="media/layui/layui.js"></script>
+<script src="media/js/vue.js"></script>
+<script>
+    $(function(){
+    	$.ajax({
+			url: "/tick/allmenu.do",
+			method: "get",
+			dataType: "json",
+			success: function(data) {
+				if(data.code == 1) {
+					appmeu.root = data.data;
+				}
+			},
+			error: function(data) {
+				alert("ajax请求错误");
+			}
+		});
+    })
+	
+    var element;
+	layui.use('element', function() {
+		element = layui.element;
+	});
+	
+	
+    var appmeu = new Vue({
+				el: "#dvmenu",
+				data: {
+					root: []
+				},
+				methods: {
+					changeTab: function(mid, murl, mname) {
+						var lay_arr = new Array();
+		                var has_id = 0;
+		                $(".layui-tab-title li").each(function () {
+		                	//alert("mid"+$(this).attr('lay-id'));
+		                    lay_arr.push($(this).attr('lay-id'));
+		                    for (var i in lay_arr) { //判断变量id值是否在其中
+		                        if (lay_arr[i] == mid) {
+		                            has_id = 1;
+		                        }
+		                    }
+		                });
+		                if (has_id == 1) { //切换到指定Tab项
+		                    //$("#iframe-mask").hide();
+		                    element.tabChange('demo', mid);
+		                } else {
+		                    element.tabAdd('demo', {//新增一个Tab项
+		                    	title: mname,
+    							content: "<iframe data-frameid='"+ mid+"' scrolling='auto' src='" + murl + "'></iframe>", //支持传入html
+    							id: mid
+		                    });
+						
+						element.tabChange('demo', mid);
+						
+		                }
+					}
+				}
+
+			})
+
+</script>
+
+<script type="text/javascript">
+
+
+
+</script>
+</body>
+
+</html>

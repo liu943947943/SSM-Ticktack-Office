@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>滴答办公系统-角色权限</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="media/layui/css/layui.css" media="all">
+	<script src="media/js/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="layui-container">
+	<div class="layui-row" style="margin-top: 10px">
+		<div class="layui-col-xs3" style="margin-right: 2px">
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">角色名称：</label>
+				<div class="layui-input-block">
+					<input type="text" id="name" name="name" class="layui-input" placeholder="角色名称">
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-xs3" style="margin-right: 2px">
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">用户：</label>
+				<div class="layui-input-block">
+					<select class="layui-input" id="fg">
+						<option value="1">有效</option>
+						<option value="2">无效</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-xs2">
+			<div class="layui-form-item">
+				<div class="layui-input-block">
+					<button class="layui-btn" onclick="searchData()"><i class="layui-icon layui-icon-search">搜索</i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="layui-row">
+	<div class="layui-col-md14">
+		<table id="tbdata" lay-filter="tbop"></table>
+		<script type="text/html" id="barop">
+			<a class="layui-btn layui-btn-mini" lay-event="see">查看权限</a>
+			<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+		</script>
+	</div>
+</div>
+
+<script type="text/javascript" src="media/js/jquery.min.js"></script>
+<script src="media/layui/layui.js"></script>
+<script src="media/js/vue.js"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    var tableIns;
+    var form1;
+    layui.use(['table','form',], function () {
+        var table = layui.table;
+        form1=layui.form;
+        tableIns = table.render({
+            elem: '#tbdata'
+            , url: '/tick/roleall.do' //数据接口
+            , page: false //关闭分页
+            , unresize:false
+            , cols: [[ //表头
+                {field: 'id', title: '序号', sort: true, fixed: 'left'}
+                , {field: 'name', title: '角色名称'}
+                , {field: 'info', title: '角色备注'}
+                , {field: 'right', title: '操作', toolbar: "#barop"}
+            ]]
+        });
+        //监听工具条
+        table.on('tool(tbop)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('是否确认删除角色?', function (index) {
+                    $.ajax({
+                        url: "/tick/roledel.do",
+                        type: "POST",
+                        data: "id=" + data.id,
+                        success: function (data) {
+                            if (data.code == 1) {
+                                //obj.del();//删除表格中的对应行数据
+                                layer.close(index);
+                                layer.msg("删除成功", {icon: 6});
+                                table.reload("tbdata");
+                            } else {
+                                layer.msg("删除失败", {icon: 5});
+                            }
+                        }
+                    });
+                });
+            } else if (obj.event === 'edit') {//编辑 修改
+            	itsAuthority(data.id);
+                loadRoles(data);
+            }else if (obj.event === 'see') {//查看权限
+            	itsAuthority(data.id);
+                loadRoles(data);
+            }
+        });
+        
+        form1.render();
+    });
+    function searchData() {
+        tableIns.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+                name: $("#name").val()
+                //, flag: $("#fg").val()
+            }
+            /*  , page: {
+               curr: 1 //重新从第 1 页开始
+             } */
+        });
+    }
+    function itsAuthority(id){
+    	$.ajax({
+            url: "/tick/itsauthority.do",
+            data: {"rid":id},
+            success: function (obj) {
+                if (obj.code == 1) {
+                	appmeu.root = obj.data; 
+                } 
+            }
+        })
+    }
+    //修改
+    function changeRole() {
+        $.ajax({
+            url: "userroleedit.do",
+            data: $("#fm1").serialize(),
+            success: function (obj) {
+                if (obj.code == 1000) {
+                    layer.msg("编辑权限成功");
+                } else {
+                    layer.msg("编辑权限失败");
+                }
+                layer.closeAll();
+            }
+        })
+    }
+
+    function loadRoles(user) {
+        console.log(user)
+        $("#rid").val(user.id);
+        $("#info").val(user.info);
+        layer.open({
+            area: ['500px', '400px'],
+            title: '角色权限编辑',
+            type: 1,
+            content:  $('#dvlay'), //这里content是一个普通的String
+            btn: ['确认', '取消'],
+            yes: function(index, layero){
+                $.ajax({
+                    url: "/tick/roleedit.do",
+                    data: $("#fm1").serialize(),
+                    success: function (obj) {
+                        if (obj.code == 1) {
+                            layer.msg("编辑权限成功");
+                            searchData();
+                        } else {
+                            layer.msg("编辑权限失败");
+                        }
+                    }
+                })
+                layer.close(index);
+            },cancel: function(){
+            }
+        });
+        
+    }
+</script>
+</body>
+<div style="display:none; margin-top:10px; width: 480px;" id="dvlay"  >
+	<form id="fm1" class="layui-form layui-form-pane" onsubmit="return false">
+		<div class="layui-form-item"  >
+			<label class="layui-form-label">角色：</label>
+			<div class="layui-input-inline">
+				<input id="rid" name="rid" readonly style="display:none;" class="layui-input">
+				<input id="info" name="info" readonly class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item" >
+			<label class="layui-form-label">权限：</label><br><br><br>
+			<div  id="dv1">
+				<div v-for="r in root">
+					<template  v-if="r.aurl === 'true'">
+						<input type="checkbox" name="itsauthority" :value="(r.id)" :title="(r.title)" checked>
+					</template >
+					<template v-else>
+						<input type="checkbox" name="itsauthority" :value="(r.id)" :title="(r.title)">
+				    </template>
+				</div>
+			</div>
+				<script type="text/javascript">
+                    	var appmeu = new Vue({
+							el: "#dv1",
+							data: {
+								root: []
+							},
+							methods: {
+								
+							},
+							updated(){
+								form1.render();
+							}
+						});	   
+                    </script> 
+			
+		</div>
+	</form>
+</div>
+</html>
