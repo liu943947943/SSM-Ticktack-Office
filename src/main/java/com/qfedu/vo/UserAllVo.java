@@ -1,4 +1,4 @@
-package com.vo;
+package com.qfedu.vo;
 
 public class UserAllVo {
 	private Integer id;

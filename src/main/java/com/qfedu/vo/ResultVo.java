@@ -1,4 +1,4 @@
-package com.vo;
+package com.qfedu.vo;
 
 import java.io.Serializable;
 
