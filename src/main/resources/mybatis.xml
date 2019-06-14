@@ -10,7 +10,7 @@
 
 	<!-- 设置类型的别名 -->
 	<typeAliases>
-		<typeAlias type="com.qfedu.pojo.News" alias="news"/>
+		<typeAlias type="com.qfedu.pojo.User" alias="user"/>
 	</typeAliases>
 
 	<plugins>

@@ -22,7 +22,7 @@
 <body class="layui-bg-black">
 	<div class="layui-canvs"></div>
 	<div class="layui-layout layui-layout-login">
-		<form id="loginin" action="login.do" method="post" onsubmit="return false">
+		<form id="form" action="login.do" method="post" onsubmit="return false">
 			<h1>
 				<strong>滴答办公系统登录</strong> <em>Tick-tock Office System</em>
 			</h1>
@@ -31,7 +31,7 @@
 					value="admin" />
 			</div>
 			<div class="layui-pwd-icon larry-login">
-				<input type="password" placeholder="密码" name="password" value="123"
+				<input type="password" placeholder="密码" name="password" value="123456"
 					class="login_txtbx" />
 			</div>
 			<input type="hidden" name="ip" id="ip1"> <input type="hidden"
@@ -80,13 +80,13 @@
 				error : function() {
 				}
 			});
-			
-			$("#loginin").validate({
+
+			$("#form").validate({
 				submitHandler:function(){
 					$.ajax({
 						type:"post",
-						url:"/tick/login.do",
-						data:$("#loginin").serialize(),
+						url:"user/login.do",
+						data:$("form").serialize(),
 						dataType:"json",
 						success:function(data){
 							if(data.code == 1){
@@ -110,7 +110,7 @@
 				}
 			})
 		});
-		
+
 		
 	</script>
 </body>

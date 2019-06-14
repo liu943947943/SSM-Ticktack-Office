@@ -9,6 +9,9 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
 方法的返回值类型和配置中返回类型保持一致
  -->
 <mapper namespace="com.qfedu.dao.UserDao">
+    <select id="findByUser" resultType="user">
+        select * from t_user where no=#{no}
+    </select>
 	
 
 </mapper>

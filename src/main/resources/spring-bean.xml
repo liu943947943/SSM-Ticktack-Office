@@ -23,7 +23,7 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		  init-method="init" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/mydb05" />
+		<property name="url" value="jdbc:mysql://localhost:3306/mydb06" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<!-- 配置初始化大小、最小、最大 -->
