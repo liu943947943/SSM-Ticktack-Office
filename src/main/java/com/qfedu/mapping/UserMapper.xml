@@ -12,6 +12,8 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
     <select id="findByUser" resultType="user">
         select * from t_user where no=#{no}
     </select>
-	
+    <update id="update" parameterType="user">
+        update t_user set flag=#{flag} where no=#{no}
+    </update>
 
 </mapper>

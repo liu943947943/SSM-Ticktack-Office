@@ -5,6 +5,7 @@ package com.qfedu.service.impl;/**
 import com.qfedu.dao.UserDao;
 import com.qfedu.pojo.User;
 import com.qfedu.service.UserService;
+import com.qfedu.vo.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String no,String password) {
-        return userDao.findByUser(no,password);
+        User user = userDao.findByUser(no);
+        if(user == null){
+            throw new MyException(1, "不能为空");
+        }
+        if(user.getFlag() == 0){
+            throw new RuntimeException("账户没权限");
+        }
+        if(!user.getPassword().equals(password)){
+            throw new MyException(2, "密码错误");
+        }
+
+        return user;
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.update(user);
     }
 }
