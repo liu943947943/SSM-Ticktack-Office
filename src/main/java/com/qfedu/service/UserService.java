@@ -10,5 +10,7 @@ public interface UserService {
     //登录--通过user的工号查找对象
 
     User login(String no,String password);
-    public void update(User user);
+    void update(User user);
+    User selectUserById(Integer id);
+    void updatepass(User user);
 }

@@ -38,4 +38,14 @@ public class UserServiceImpl implements UserService {
     public void update(User user) {
         userDao.update(user);
     }
+
+    @Override
+    public User selectUserById(Integer id) {
+        return userDao.selectUserById(id);
+    }
+
+    @Override
+    public void updatepass(User user) {
+        userDao.updatepass(user);
+    }
 }

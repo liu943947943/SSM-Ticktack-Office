@@ -12,5 +12,8 @@ import java.util.List;
 public interface UserDao {
     //权限管理》》》用户角色》》》查找所有的用户
    User findByUser(String no);
-    public void update(User user);
+     void update(User user);
+    User selectUserById(Integer id);
+    void updatepass(User user);
+
 }

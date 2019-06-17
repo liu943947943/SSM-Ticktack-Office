@@ -15,5 +15,17 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
     <update id="update" parameterType="user">
         update t_user set flag=#{flag} where no=#{no}
     </update>
+    <select id="selectUserById" parameterType="Integer" resultType="user">
+        select * from t_user where id = #{id}
+    </select>
+    <update id="updatepass" parameterType="user">
+        update t_user
+        <set>
+        <if test="password!=null">
+            password=#{password}
+        </if>
+    </set>
+        where id=#{id}
+    </update>
 
 </mapper>

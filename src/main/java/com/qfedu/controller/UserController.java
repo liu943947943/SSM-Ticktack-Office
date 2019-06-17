@@ -7,6 +7,7 @@ import com.qfedu.service.UserService;
 import com.qfedu.vo.JsonBean;
 import com.qfedu.vo.MyException;
 import com.qfedu.vo.ResultVo;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpSession;
  **/
 @RestController
 @RequestMapping("/user")
+@ResponseBody
 public class UserController {
     @Autowired
     private UserService userService;
@@ -70,6 +72,26 @@ public class UserController {
             e.printStackTrace();
             return new JsonBean(0, e.getMessage());
         }
+    }
+    @RequestMapping("/logout.do")
+    public JsonBean logout(HttpSession session){
+        User user = (User)session.getAttribute("user");
+        if(user != null){
+            session.invalidate();
+        }
+        return new JsonBean(1, null);
+    }
+    @RequestMapping("/editpass.do")
+    public JsonBean edit(String password,String newpass,@Param("id") Integer id){
+        User user = userService.selectUserById(id);
+        if(!password.equals(user.getPassword())){
+            return new JsonBean(0,"旧密码输入错误");
+        }else{
+            user.setPassword(newpass);
+            userService.updatepass(user);
+            return new JsonBean(1,"修改成功,请重新登陆");
+        }
+
     }
 
 }
