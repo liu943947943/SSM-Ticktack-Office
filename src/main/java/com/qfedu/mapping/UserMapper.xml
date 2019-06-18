@@ -2,15 +2,25 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 
-dao层接口的全限定名和namespace一样
-dao层接口中的方法名和映射文件中增删改查配置的statement id一致
-方法的参数和配置的输入参数保持一致
-方法的返回值类型和配置中返回类型保持一致
- -->
+
 <mapper namespace="com.qfedu.dao.UserDao">
-    <select id="findByUser" resultType="user">
-        select * from t_user where no=#{no}
+    <resultMap id="resultmap" type="com.qfedu.pojo.User">
+        <id column="id" property="id"></id>
+        <result column="no" property="no"></result>
+        <result column="password" property="password"></result>
+        <result column="name" property="name"></result>
+        <result column="flag" property="flag"></result>
+        <result column="headphoto" property="headphoto"></result>
+        <association property="userPic" resultMap="findByUser"></association>
+    </resultMap>
+    <resultMap id="findByUser" type="com.qfedu.pojo.UserPic">
+        <id column="id" property="id"></id>
+        <result column="path" property="path"></result>
+    </resultMap>
+
+    <select id="findByUser" resultMap="resultmap"  >
+    select u.*,s.id as headphoto,s.path from t_user u LEFT OUTER JOIN t_pic s ON u.headphoto = s.id  where
+     u.no = #{no}
     </select>
     <update id="update" parameterType="user">
         update t_user set flag=#{flag} where no=#{no}
@@ -21,11 +31,71 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
     <update id="updatepass" parameterType="user">
         update t_user
         <set>
-        <if test="password!=null">
-            password=#{password}
-        </if>
+            <if test="no != null">
+                no = #{no},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="name != null">
+                name= #{name},
+            </if>
+            <if test="flag != null">
+                flag= #{flag},
+            </if>
+            <if test="headphoto != null">
+                headphoto = #{headphoto},
+            </if>
+
     </set>
         where id=#{id}
     </update>
 
+    <select id="selectUserByLoginName" parameterType="String" resultMap="resultmap">
+     select * FROM  t_user where name = #{name}
+    </select>
+    <insert id="insertSelective" parameterType="user">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="no != null">
+                no,
+            </if>
+            <if test="password != null">
+               password,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="headphoto != null">
+                headphoto ,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="no != null">
+                #{no},
+            </if>
+            <if test="password != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="name!= null">
+                #{name},
+            </if>
+            <if test="flag != null">
+                #{flag},
+            </if>
+            <if test="headphoto != null">
+                #{headphoto},
+            </if>
+
+        </trim>
+    </insert>
 </mapper>

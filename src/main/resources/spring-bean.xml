@@ -13,9 +13,9 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 		<!--  spring扫描控制器以外的注解 -->
-       <!--<context:component-scan base-package="com.qfedu">
+       <context:component-scan base-package="com.qfedu">
 		   	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>
-       </context:component-scan>-->
+       </context:component-scan>
 	<context:component-scan base-package="com.qfedu.service.impl">
 	</context:component-scan>
      

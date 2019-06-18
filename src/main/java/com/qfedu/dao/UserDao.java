@@ -1,6 +1,7 @@
 package com.qfedu.dao;
 
 import com.qfedu.pojo.User;
+import com.qfedu.pojo.UserPic;
 import com.qfedu.vo.UserAllVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,5 +16,9 @@ public interface UserDao {
      void update(User user);
     User selectUserById(Integer id);
     void updatepass(User user);
+    Integer insertSelective(UserPic userPic);
+
+    User selectUserByLoginName(String name);
+
 
 }

@@ -4,6 +4,7 @@ package com.qfedu.controller;/**
 
 import com.qfedu.pojo.User;
 import com.qfedu.service.UserService;
+import com.qfedu.utils.UploadUtils;
 import com.qfedu.vo.JsonBean;
 import com.qfedu.vo.MyException;
 import com.qfedu.vo.ResultVo;
@@ -15,9 +16,12 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.SecurityContextProvider;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +35,8 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UploadUtils uploadUtils;
 
     @RequestMapping("/login.do")
     public
@@ -45,6 +51,7 @@ public class UserController {
 //		}
         try {
             User user = userService.login(no, password);
+            System.out.println(user);
             session.removeAttribute("count");
             session.setAttribute("user", user);
             return new JsonBean(1, null);
@@ -93,5 +100,34 @@ public class UserController {
         }
 
     }
+    @RequestMapping("/exitUser.do")
+    public String esitUser(User userInfo, Model model, String myid, @RequestParam("file")MultipartFile file){
+        try {
+            User user = userService.selectUserByLoginName(userInfo.getName());
+            Integer picId=null;
+            if (file!=null){
 
+                picId= uploadUtils.savePic(file);
+            }
+            if(myid==null&&user!=null){
+                model.addAttribute("msg","操作失败,该登入名已存在！");
+            }else{
+                if(myid!=null&&!"".equals(myid)){//myid存在表示编辑操作
+                    userInfo.setId(Integer.parseInt(myid));
+                    if(picId!=null){
+
+                        userInfo.setHeadphoto(picId);
+                    }
+                    userService.update(user);
+
+                }
+
+                model.addAttribute("msg","操作成功！");
+            }
+        }catch (Exception e){
+            model.addAttribute("msg","操作失败！");
+            e.printStackTrace();
+        }
+        return "userinfo";
+    }
 }

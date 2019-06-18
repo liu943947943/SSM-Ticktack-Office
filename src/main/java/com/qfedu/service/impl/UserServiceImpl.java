@@ -48,4 +48,10 @@ public class UserServiceImpl implements UserService {
     public void updatepass(User user) {
         userDao.updatepass(user);
     }
+
+
+    @Override
+    public User selectUserByLoginName(String name) {
+        return userDao.selectUserByLoginName(name);
+    }
 }

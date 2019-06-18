@@ -51,12 +51,13 @@
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                  <img src="media/images/22.jpg" class="layui-nav-img">
+                   <img width=" 50px" height="50px" src="${user.userPic.path}"  class="layui-nav-img ">
+
                     ${user.name}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:showTab(1001,'userinfo.jsp','我的信息');">我的信息</a></dd><%--
-                    <dd><a href="javascript:showTab(1001,'staffupdate.html','更改头像');">更改头像</a></dd>--%>
+                    <dd><a href="javascript:showTab(1001,'userinfo.jsp','我的信息');">我的信息</a></dd>
+                    <dd><a href="javascript:showTab(1001,'userpicexit.jsp?id=${user.id}','更改头像');">更改头像</a></dd>
                     <dd><a href="javascript:showTab(1002,'userexit.jsp?id=${user.id}','修改密码');">修改密码</a></dd>
                 </dl>
             </li>

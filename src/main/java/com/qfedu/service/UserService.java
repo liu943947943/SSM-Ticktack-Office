@@ -13,4 +13,6 @@ public interface UserService {
     void update(User user);
     User selectUserById(Integer id);
     void updatepass(User user);
+
+    User selectUserByLoginName(String name);
 }
