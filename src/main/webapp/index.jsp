@@ -145,9 +145,9 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;"  onclick="showTab(1,'/grade/goinsert','班级新增')">&nbsp;&nbsp;&nbsp;&nbsp;班级新增</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'/gradeadd.html','班级新增')">&nbsp;&nbsp;&nbsp;&nbsp;班级新增</a></dd>
 
-                        <dd><a href="javascript:;" onclick="showTab(1,'/grade/list/1','班级列表')">&nbsp;&nbsp;&nbsp;&nbsp;班级列表</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'/gradepage.jsp','班级列表')">&nbsp;&nbsp;&nbsp;&nbsp;班级列表</a></dd>
 
                     </dl>
                 </li>

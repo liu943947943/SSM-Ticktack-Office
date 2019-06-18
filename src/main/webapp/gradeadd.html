@@ -74,13 +74,13 @@
 						
 						$("form").submit(function(){
 							$.ajax({
-			                    url: "/tick/gradeadd.do",
+			                    url: "/grade/gradeadd.do",
 			                    type: "POST",
 			                    data:$("form").serialize(),
 			                    success: function(data){
 			                        if(data.code==1){
 			                            layer.msg("新增成功", {icon: 6});
-			                            window.location.href="gradelist.html"
+			                            window.location.href="gradepage.jsp"
 			                        }else{
 			                            layer.msg("删除失败", {icon: 5});
 			                        }
@@ -93,7 +93,7 @@
 			
 		//初始化数据
 		function initData() {
-			$.get("/tick/courseall.do",null,function(arr){
+			$.get("/grade/courseall.do",null,function(arr){
 				for(i=0;i<arr.length;i++){
 					$("#cds").append("<option value='"+arr[i].id+"'>"+arr[i].name+"</option>");
 				}
