@@ -71,32 +71,13 @@
             <ul class="layui-nav layui-nav-tree"  lay-shrink="all" id="lm">
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id="1"><i class="fa fa-shield"></i>&nbsp;权限管理</a>
-
-                    <dl class="layui-nav-child">
-
-                        <dd><a href="javascript:;" id="2" onclick="showTab(1,'/role/list/1','角色管理')">&nbsp;&nbsp;&nbsp;&nbsp;角色管理</a></dd>
-
-                        <dd><a href="javascript:;" id="2\" onclick="showTab(1,'/menu/list/1','菜单管理')">&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</a></dd>
-
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
-
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
-
-                    </dl>
-                </li>
-
-                <li class="layui-nav-item">
-
                     <a href="javascript:;" id=""><i class="fa fa-shield"></i>&nbsp;权限管理</a>
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/role/list/1','角色管理')">&nbsp;&nbsp;&nbsp;&nbsp;角色管理</a></dd>
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'userlist.html','角色管理')">&nbsp;&nbsp;&nbsp;&nbsp;角色管理</a></dd>
 
                         <dd><a href="javascript:;" id="" onclick="showTab(1,'/menu/list/1','菜单管理')">&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</a></dd>
-
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
 
                         <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
 
