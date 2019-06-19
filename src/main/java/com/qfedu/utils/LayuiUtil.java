@@ -10,7 +10,7 @@ public class LayuiUtil {
             resultVo.setMsg("操作成功");
             resultVo.setData(obj);
         }else {
-            resultVo.setCode(1001);
+            resultVo.setCode(0);
             resultVo.setMsg("操作失败");
         }
         return resultVo;
