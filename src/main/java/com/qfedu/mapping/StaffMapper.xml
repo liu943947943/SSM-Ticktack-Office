@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="com.qfedu.dao.StaffDao">
+    <resultMap id="BaseResultMap" type="com.qfedu.pojo.Staff" >
+        <id column="no" property="no" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="did" property="did" jdbcType="INTEGER" />
+        <result column="flag" property="flag" jdbcType="INTEGER" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="qq" property="qq" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="createdate" property="createdate" jdbcType="DATE" />
+        <result column="photo" property="photo" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.qfedu.vo.StaffVo" >
+        <id column="no" property="no" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="depart" property="depart" jdbcType="VARCHAR" />
+        <result column="flag" property="flag" jdbcType="INTEGER" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="qq" property="qq" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="createdate" property="createdate" jdbcType="DATE" />
+        <result column="photo" property="photo" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        no, name, did, flag, sex, email, qq, phone, createdate, photo
+    </sql>
+    <select id="selectStaffByPage" resultMap="BaseResultMap2">
+        SELECT s.no,s.name,d.name depart,s.sex,s.email,s.qq,s.phone,s.createdate FROM t_staff s
+        INNER JOIN t_depart d
+        ON s.did=d.id
+        where s.flag=1
+        limit #{page},#{limit}
+    </select>
+    <select id="selectStaffNum" resultType="int">
+        select
+        count(*)
+        from t_staff
+        where flag=1
+    </select>
+    <!--<select id="findByIndexAndSize" parameterType="map" resultType="staff">
+        select * from t_staff
+        <if test="info!= null">
+            where name like concat('%', #{info}, '%')
+        </if>
+        limit #{index},#{size}
+    </select>
+    <select id="count" parameterType="String" resultType="Integer">
+        select count(*) from t_staff
+        <if test="info != null">
+              where name like concat('%', #{info}, '%')
+        </if>
+    </select>-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_staff
+        where no = #{no,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_staff
+        where no = #{no,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.qfedu.pojo.Staff" >
+        insert into t_staff (no, name, did,
+        flag, sex, email, qq,
+        phone, createdate, photo
+        )
+        values (#{no,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{did,jdbcType=INTEGER},
+        #{flag,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{photo,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.qfedu.pojo.Staff" >
+        insert into t_staff
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="no != null" >
+                no,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="did != null" >
+                did,
+            </if>
+            <if test="flag != null" >
+                flag,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="qq != null" >
+                qq,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="createdate != null" >
+                createdate,
+            </if>
+            <if test="photo != null" >
+                photo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="no != null" >
+                #{no,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="did != null" >
+                #{did,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null" >
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null" >
+                #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null" >
+                #{createdate,jdbcType=DATE},
+            </if>
+            <if test="photo != null" >
+                #{photo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.Staff" >
+        update t_staff
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="did != null" >
+                did = #{did,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null" >
+                flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null" >
+                qq = #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null" >
+                createdate = #{createdate,jdbcType=DATE},
+            </if>
+            <if test="photo != null" >
+                photo = #{photo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where no = #{no,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.Staff" >
+        update t_staff
+        set name = #{name,jdbcType=VARCHAR},
+        did = #{did,jdbcType=INTEGER},
+        flag = #{flag,jdbcType=INTEGER},
+        sex = #{sex,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        qq = #{qq,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        createdate = #{createdate,jdbcType=DATE},
+        photo = #{photo,jdbcType=VARCHAR}
+        where no = #{no,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

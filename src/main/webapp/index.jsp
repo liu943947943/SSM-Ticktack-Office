@@ -107,9 +107,9 @@
                     <a href="javascript:;" id=""><i class="fa fa-sitemap"></i>&nbsp;部门管理</a>
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/depart/list/1','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/departlist.html','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/departadd.jsp','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/departadd.html','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
 
                     </dl>
                 </li>
@@ -119,9 +119,9 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/emp/list/1','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/stafflist.jsp','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
 
-                        <dd><a href="javascript:;" id= onclick="showTab(1,'/empadd.jsp','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/staffadd.html','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
 
                     </dl>
                 </li>

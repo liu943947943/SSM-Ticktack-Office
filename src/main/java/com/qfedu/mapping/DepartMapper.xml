@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.dao.DepartDao" >
+  <resultMap id="BaseResultMap" type="com.qfedu.pojo.Depart" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="Createtime" property="createtime" jdbcType="DATE" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <association property="staff" resultMap="staffAll"></association>
+  </resultMap>
+  <resultMap id="staffAll" type="com.qfedu.pojo.Staff">
+    <id column="no" property="no" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="did" property="did" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    id, name, num, Createtime, flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_depart
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_depart
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qfedu.pojo.Depart" >
+    insert into t_depart (id, name, num, 
+      Createtime, flag)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=DATE}, #{flag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qfedu.pojo.Depart" >
+    insert into t_depart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="createtime != null" >
+        Createtime,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.Depart" >
+    update t_depart
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        Createtime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.Depart" >
+    update t_depart
+    set name = #{name,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      Createtime = #{createtime,jdbcType=DATE},
+      flag = #{flag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 查询所有的部门供员工新增时选择部门 -->
+  <select id="selectAllDepart" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_depart
+    where flag =1
+  </select>
+  
+  <!-- 查询所有的部门分页 -->
+  <select id="selectAllDepartByPage" resultMap="BaseResultMap">
+    select d.name, d.id, count(1) as 'num',d.createtime
+    from t_depart d
+    left join t_staff s
+    on s.did = d.id
+    where d.flag=1
+    group by d.id
+    limit #{page},#{limit}
+  </select>
+  
+  <!-- 查询所有的数量 -->
+  <select id="selectDepartNum" resultType="java.lang.Integer">
+    select 
+    count(*)
+    from t_depart
+    where flag =1
+  </select>
+  
+  <!-- 新增员工时部门人数加1 -->
+  <update id="departnumadd" parameterType="java.lang.Integer" >
+    update t_depart
+    set 
+    num = num + 1
+     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 删除员工时部门人数减1 -->
+  <update id="departnumdel" parameterType="String" >
+    update t_depart
+    set 
+    num = num - 1
+    where name = #{name}
+  </update>
+</mapper>

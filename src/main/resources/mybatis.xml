@@ -11,6 +11,7 @@
 	<!-- 设置类型的别名 -->
 	<typeAliases>
 		<typeAlias type="com.qfedu.pojo.User" alias="user"/>
+		<typeAlias type="com.qfedu.pojo.Staff" alias="staff"/>
 	</typeAliases>
 
 	<plugins>
