@@ -93,7 +93,7 @@
 			
 		//初始化数据
 		function initData() {
-			$.get("/grade/courseall.do",null,function(arr){
+			$.get("/course/courseall.do",null,function(arr){
 				for(i=0;i<arr.length;i++){
 					$("#cds").append("<option value='"+arr[i].id+"'>"+arr[i].name+"</option>");
 				}

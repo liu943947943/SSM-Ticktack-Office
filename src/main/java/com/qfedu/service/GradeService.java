@@ -16,4 +16,7 @@ public interface GradeService {
     
     //班级新增
     int gradeAdd(Grade grade);
+
+    //查询所有的班级
+    List<Grade> selectAllGrade();
 }

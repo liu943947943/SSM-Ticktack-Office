@@ -1,11 +1,13 @@
-package com.qfedu.pojo;
+package com.qfedu.vo;
+
+import com.qfedu.pojo.Course;
 
 import java.util.Date;
 
 /**
- * Created by Administrator on 2019/6/18.
+ * Created by Administrator on 2019/6/19.
  */
-public class Grade {
+public class GradeVo {
 	private Integer id;
 
 	private String name;
@@ -18,7 +20,7 @@ public class Grade {
 
 	private String location;
 
-	private Integer cid;
+	private String course;
 
 	private Integer count;
 
@@ -78,11 +80,11 @@ public class Grade {
 		this.location = location;
 	}
 
-	public Integer getCid() {
-		return cid;
+	public String getCourse() {
+		return course;
 	}
 
-	public void setCid(Integer cid) {
-		this.cid = cid;
+	public void setCourse(String course) {
+		this.course = course;
 	}
 }

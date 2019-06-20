@@ -34,7 +34,7 @@
 		    ,cols: [[ //表头
 		      {field: 'id', title: '序号', sort: true, fixed: 'left'}
 		      ,{field: 'name', title: '班级名称'} 
-		      ,{field: 'cname', title: '学科名称'}
+		      ,{field: 'course', title: '学科名称'}
 		      ,{field: 'count', title: '班级人数', sort: true}
 		      ,{field: 'week', title: '周数', sort: true}
 		      ,{field: 'location', title: '位置'}

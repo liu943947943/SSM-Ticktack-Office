@@ -1,5 +1,4 @@
 package com.qfedu.controller;
-
 import com.qfedu.pojo.Grade;
 import com.qfedu.service.GradeService;
 import com.qfedu.utils.LayuiUtil;
@@ -9,9 +8,11 @@ import com.qfedu.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/grade")
@@ -46,7 +47,7 @@ public class GradeController {
 	//班级修改
 	@RequestMapping("/gradeedit.do")
 	ResultVo gradeEdit(Integer id, String name, Integer week,
-					   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date createdate,
+					   @DateTimeFormat(pattern = "yyyy-MM-dd") Date createdate,
 					   String location, Integer cid) {
 		Grade grade = new Grade();
 		grade.setId(id);
@@ -70,8 +71,13 @@ public class GradeController {
 	}
 
 
+	//查询所有的班级供新增学生时选班
+	@RequestMapping("/gradeall.do")
+	List<Grade> gradeAll() {
+		return gradeService.selectAllGrade();
+	}
+}
 	
 	
 	
-	
-}	
+

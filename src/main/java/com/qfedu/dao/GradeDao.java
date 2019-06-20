@@ -28,4 +28,8 @@ public interface GradeDao {
 
 	//班级数量
 	int selectGradeNum();
+
+
+	//查询所有的班级
+	List<Grade> selectAllGrade();
 }

@@ -69,7 +69,7 @@
 
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-shrink="all" id="lm">
-                <li class="layui-nav-item">
+              <%--  <li class="layui-nav-item">
 
                     <a href="javascript:;" id="1"><i class="fa fa-shield"></i>&nbsp;权限管理</a>
 
@@ -85,7 +85,7 @@
 
                     </dl>
                 </li>
-
+--%>
                 <li class="layui-nav-item">
 
                     <a href="javascript:;" id=""><i class="fa fa-shield"></i>&nbsp;权限管理</a>
@@ -98,7 +98,7 @@
 
                         <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
+                       <%-- <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>--%>
 
                     </dl>
                 </li>
@@ -132,9 +132,9 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id= onclick="showTab(1,'/courseadd.jsp','专业新增')">&nbsp;&nbsp;&nbsp;&nbsp;专业新增</a></dd>
+                        <dd><a href="javascript:;"id="" onclick="showTab(1,'/courseadd.html','专业新增')">&nbsp;&nbsp;&nbsp;&nbsp;专业新增</a></dd>
 
-                        <dd><a href="javascript:;" id= onclick="showTab(1,'/course/list/1','专业列表')">&nbsp;&nbsp;&nbsp;&nbsp;专业列表</a></dd>
+                        <dd><a href="javascript:;"id="" onclick="showTab(1,'/courselist.html','专业列表')">&nbsp;&nbsp;&nbsp;&nbsp;专业列表</a></dd>
 
                     </dl>
                 </li>
@@ -158,11 +158,11 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" onclick="showTab(1,'/student/goinsert','学员新增')">&nbsp;&nbsp;&nbsp;&nbsp;学员新增</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'/studentadd.html','学员新增')">&nbsp;&nbsp;&nbsp;&nbsp;学员新增</a></dd>
 
-                        <dd><a href="javascript:;" onclick="showTab(1,'/student/goImport','学员导入')">&nbsp;&nbsp;&nbsp;&nbsp;学员导入</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'/studentbatch.html','学员导入')">&nbsp;&nbsp;&nbsp;&nbsp;学员导入</a></dd>
 
-                        <dd><a href="javascript:;"  onclick="showTab(1,'/student/list/1','学员列表')">&nbsp;&nbsp;&nbsp;&nbsp;学员列表</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'/studentlist.html','学员列表')">&nbsp;&nbsp;&nbsp;&nbsp;学员列表</a></dd>
 
                     </dl>
                 </li>
