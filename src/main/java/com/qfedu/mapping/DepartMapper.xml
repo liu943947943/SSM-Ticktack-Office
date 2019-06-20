@@ -120,8 +120,8 @@
     from t_depart d
     left join t_staff s
     on s.did = d.id
+    where d.flag=1
     group by d.id
-
     limit #{page},#{limit}
   </select>
   
