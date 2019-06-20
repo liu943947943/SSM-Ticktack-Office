@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 
@@ -84,7 +86,7 @@
 						class="fa fa-users" aria-hidden="true"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-text">员工人数</span> <span
-							class="info-box-number" id="s3">65</span>
+							class="info-box-number" id="s2">65</span>
 					</div>
 				</div>
 			</div>
@@ -95,7 +97,7 @@
 						class="fa fa-users" aria-hidden="true"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-text">在读班级</span> <span
-							class="info-box-number" id="s4">85</span>
+							class="info-box-number" id="s3">85</span>
 					</div>
 				</div>
 			</div>
@@ -122,26 +124,32 @@
 		</div>
 	</div>
 	<script src="media/layui/layui.js"></script>
+
 	<script>
 		layui.use('table', function() {
+			var id;
+			id = decodeURI(location.search).substr(4);
 			var table = layui.table;
-			 
-			var table = layui.table;
-			  
 			  //第一个实例
 			  table.render({
 			    elem: '#tbdata'
 			    ,height: '360px'
-			    ,url: 'loginloglist.do' //数据接口
-			    ,page: false //开启分页
+			    ,url: 'user/loginloglist.do?id='+id //数据接口
+			    ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+					  layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+					  //,curr: 5 //设定初始在第 5 页
+					  ,groups: 1 //只显示 1 个连续页码
+					  ,first: false //不显示首页
+					  ,last: false //不显示尾页
+
+				  }
 			    ,cols: [[ //表头
 			    	{field: 'no', title: '登录账户'}
 			      ,{field: 'ip', title: '登录IP'}
-			      ,{field: 'location', title: '登录城市'} 
+			      ,{field: 'location', title: '登录城市'}
 			      ,{field: 'createtime', title: '登录时间'}
 			      ]]
 			  });
-			  
 		});
 	</script>
 </body>

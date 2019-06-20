@@ -16,9 +16,9 @@
      	使用父包，只扫描控制层的注解
      	use-default-filters="false" 不使用默认的filter扫描控制层、业务层、数据访问层的注解
       -->
-	<!--<context:component-scan base-package="com.qfedu" use-default-filters="false">
+	<context:component-scan base-package="com.qfedu" use-default-filters="false">
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:include-filter>
-	</context:component-scan>-->
+	</context:component-scan>
     <context:component-scan base-package="com.qfedu.controller">
     </context:component-scan>
     
@@ -32,7 +32,7 @@
                     <bean class="com.fasterxml.jackson.databind.ObjectMapper">  
                         <property name="dateFormat">  
                             <bean class="java.text.SimpleDateFormat">  
-                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />  
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd" />
                             </bean>  
                         </property>  
                     </bean>  

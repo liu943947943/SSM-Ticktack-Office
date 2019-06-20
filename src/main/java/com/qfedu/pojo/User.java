@@ -12,23 +12,31 @@ public class User {
     private String no;
     private String password;
     private String name;
-    private Integer role;
-    private Integer flag;
+    //private Integer role;
+    private char flag;
     private Integer headphoto;
     private UserPic userPic;
+    private Role userRole;
 
-    public User(Integer id, String no, String password, String name, Integer role, Integer flag, Integer headphoto, UserPic userPic) {
+    public User(Integer id, String no, String password, String name,  char flag, Integer headphoto, UserPic userPic, Role userRole) {
         this.id = id;
         this.no = no;
         this.password = password;
         this.name = name;
-        this.role = role;
+
         this.flag = flag;
         this.headphoto = headphoto;
         this.userPic = userPic;
+        this.userRole = userRole;
     }
 
+    public Role getUserRole() {
+        return userRole;
+    }
 
+    public void setUserRole(Role userRole) {
+        this.userRole = userRole;
+    }
 
     public User() {
         super();
@@ -73,19 +81,13 @@ public class User {
         this.name = name;
     }
 
-    public Integer getRole() {
-        return role;
-    }
 
-    public void setRole(Integer role) {
-        this.role = role;
-    }
 
-    public Integer getFlag() {
+    public char getFlag() {
         return flag;
     }
 
-    public void setFlag(Integer flag) {
+    public void setFlag(char flag) {
         this.flag = flag;
     }
 
@@ -104,7 +106,7 @@ public class User {
                 ", no='" + no + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", role=" + role +
+
                 ", flag=" + flag +
                 ", headphoto=" + headphoto +
                 ", userPic=" + userPic +

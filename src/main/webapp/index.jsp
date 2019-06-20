@@ -72,36 +72,36 @@
             <ul class="layui-nav layui-nav-tree"  lay-shrink="all" id="lm">
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id=""><i class="fa fa-shield"></i>&nbsp;权限管理</a>
+                    <a href="javascript:;" id=><i class="fa fa-shield"></i>&nbsp;权限管理</a>
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'userlist.html','角色管理')">&nbsp;&nbsp;&nbsp;&nbsp;角色管理</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'userlimit.html','角色管理')">&nbsp;&nbsp;&nbsp;&nbsp;角色管理</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/menu/list/1','菜单管理')">&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'resourcelimit.html','菜单管理')">&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'rolelimit.html','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
 
                     </dl>
                 </li>
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id=""><i class="fa fa-sitemap"></i>&nbsp;部门管理</a>
+                    <a href="javascript:;" id=><i class="fa fa-sitemap"></i>&nbsp;部门管理</a>
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/depart/list/1','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'departlist.jsp','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/departadd.jsp','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'departadd.jsp','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
 
                     </dl>
                 </li>
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id=""><i class="layui-icon layui-icon-user"></i>&nbsp;员工管理</a>
+                    <a href="javascript:;" id=><i class="layui-icon layui-icon-user"></i>&nbsp;员工管理</a>
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/emp/list/1','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
+                        <dd><a href="javascript:;" id= onclick="showTab(1,'/emp/list/1','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
 
                         <dd><a href="javascript:;" id= onclick="showTab(1,'/empadd.jsp','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
 
@@ -127,9 +127,9 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;"  onclick="showTab(1,'/grade/goinsert','班级新增')">&nbsp;&nbsp;&nbsp;&nbsp;班级新增</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'/gradeadd.html','班级新增')">&nbsp;&nbsp;&nbsp;&nbsp;班级新增</a></dd>
 
-                        <dd><a href="javascript:;" onclick="showTab(1,'/grade/list/1','班级列表')">&nbsp;&nbsp;&nbsp;&nbsp;班级列表</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'/gradepage.jsp','班级列表')">&nbsp;&nbsp;&nbsp;&nbsp;班级列表</a></dd>
 
                     </dl>
                 </li>
@@ -196,7 +196,7 @@
             $("#lm").append(s);
             element.render();
         });
-        showTab(20000,"main.html","首页");
+        showTab(20000,"main.jsp?id=${user.no}","首页");
     });
     var tid=-1;
     function showTab(id,u,n) {

@@ -85,6 +85,7 @@
    			<tx:method name="delete*" read-only="false"  propagation="REQUIRED"/>
    			<tx:method name="update*" read-only="false"  propagation="REQUIRED"/>
    			<tx:method name="find*" read-only="true"  propagation="REQUIRED"/>
+			<tx:method name="*" read-only="true" />
    			<!-- 针对其余的方法 -->
    			<tx:method name="*" propagation="NOT_SUPPORTED"/>
 

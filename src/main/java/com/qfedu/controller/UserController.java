@@ -2,12 +2,15 @@ package com.qfedu.controller;/**
  * Created by HP on 2019/6/13.
  */
 
+import com.qfedu.pojo.Authority;
+import com.qfedu.pojo.Role;
 import com.qfedu.pojo.User;
 import com.qfedu.service.UserService;
 import com.qfedu.utils.UploadUtils;
 import com.qfedu.vo.JsonBean;
 import com.qfedu.vo.MyException;
 import com.qfedu.vo.ResultVo;
+import com.qfedu.vo.VoMenu;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author HP liuchenglong
@@ -68,7 +73,7 @@ public class UserController {
                     // 冻结账户
                     User u = new User();
                     u.setName(no);
-                    u.setFlag(0);
+
                     userService.update(u);
                 }
                 session.setAttribute("count", count);
@@ -101,9 +106,9 @@ public class UserController {
 
     }
     @RequestMapping("/exitUser.do")
-    public String esitUser(User userInfo, Model model, String myid, @RequestParam("file")MultipartFile file){
+    public String esitUser(User userInfo, Model model, @Param("id") Integer id, String myid, @RequestParam("file")MultipartFile file){
         try {
-            User user = userService.selectUserByLoginName(userInfo.getName());
+            User user = userService.selectUserById(userInfo.getId());
             Integer picId=null;
             if (file!=null){
 
@@ -128,6 +133,118 @@ public class UserController {
             model.addAttribute("msg","操作失败！");
             e.printStackTrace();
         }
-        return "userinfo";
+        return "redirect:userinfo";
+    }
+    @RequestMapping("/userall.do")
+    @ResponseBody
+    public Map<String ,Object> userAll(Integer page, Integer limit, String no){
+
+        Map<String ,Object> map = userService.findAll(page,limit,no);
+
+        return map;
+    }
+    @RequestMapping("/roleall.do")
+    @ResponseBody
+    public List<Role> roleAll(){
+
+        List<Role> list = userService.findAllRole();
+
+        return list;
+    }
+
+    @RequestMapping("/loginloglist.do")
+    @ResponseBody
+    public Map<String ,Object> loginLogList(String id, Integer page, Integer limit){
+
+        Map<String, Object> logList = userService.findLogList(id, page, limit);
+        System.out.println(logList);
+
+        return logList;
+    }
+    @RequestMapping("/findPerms.do")
+    @ResponseBody
+    public JsonBean listPerms(String id){
+
+        List<VoMenu> list = userService.findPermsById(id);
+
+        return new JsonBean(1,list);
+    }
+
+
+    @RequestMapping("/userroleedit.do")
+    @ResponseBody
+    public JsonBean userRoleEdit(Integer id,String[] rids){
+
+        userService.updateRole(id,rids);
+
+        return new JsonBean(1000,null);
+    }
+    @RequestMapping("/userdel.do")
+    @ResponseBody
+    public JsonBean userDel(Integer id){
+
+        userService.delUser(id);
+
+        return new JsonBean(1000,null);
+    }
+
+    @RequestMapping("/authoritylist.do")
+    @ResponseBody
+    public Map<String ,Object> authorityList(Integer page,Integer limit){
+
+        Map<String ,Object> map = userService.findAllAuthority(page,limit);
+
+        return map;
+    }
+
+    @RequestMapping("/authorityupdate.do")
+    @ResponseBody
+    public JsonBean authorityUpdate(Authority authority){
+
+        try {
+            userService.updateAutho(authority);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JsonBean(0,"修改失败");
+        }
+
+        return new JsonBean(1,"修改成功");
+    }
+
+    @RequestMapping("/authorityroot.do")
+    @ResponseBody
+    public List<VoMenu> authorityRoot(){
+
+        List<VoMenu> list = userService.findAllParentAutho();
+
+        return list;
+    }
+
+    @RequestMapping("/authorityadd.do")
+    @ResponseBody
+    public JsonBean authorityAdd(Authority authority,String pid){
+
+        if(pid.equals("0")){
+            authority.setParentId(0);
+        }
+
+        try {
+            userService.authorityAdd(authority);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JsonBean(1,"操作失败");
+        }
+
+        return new JsonBean(1,"操作成功");
+    }
+
+    @RequestMapping("/coursedelete.do")
+    @ResponseBody
+    public JsonBean courseDelete(String id) {
+
+
+        userService.delAuthorityById(id);
+        return new JsonBean(1, "操作成功");
+
     }
 }

@@ -11,15 +11,43 @@
         <result column="name" property="name"></result>
         <result column="flag" property="flag"></result>
         <result column="headphoto" property="headphoto"></result>
-        <association property="userPic" resultMap="findByUser"></association>
+        <collection property="userPic" ofType="com.qfedu.pojo.UserPic">
+            <id column="id" property="id"></id>
+            <result column="path" property="path"></result>
+        </collection>
+        <collection property="userRole" ofType="com.qfedu.pojo.Role">
+            <id column="id" property="id"></id>
+            <result column="info" property="info"></result>
+            <result column="name" property="name"></result>
+            <result column="parentid" property="parentid"></result>
+        </collection>
     </resultMap>
-    <resultMap id="findByUser" type="com.qfedu.pojo.UserPic">
+
+    <resultMap id="VoMenuResult" type="com.qfedu.vo.VoMenu">
         <id column="id" property="id"></id>
-        <result column="path" property="path"></result>
+        <result column="title" property="aTitle"></result>
+        <result column="aurl" property="aUrl"></result>
+        <collection property="voMenuList" javaType="java.util.ArrayList" ofType="com.qfedu.vo.VoMenu">
+            <id column="cid" property="id"></id>
+            <result column="ctitle" property="aTitle"></result>
+            <result column="curl" property="aUrl"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="VoUserResult" type="com.qfedu.vo.VoUser">
+        <id column="id" property="id"></id>
+        <result column="no" property="no"></result>
+        <result column="name" property="name"></result>
+        <result column="role" property="role"></result>
+        <result column="flag" property="flag"></result>
+        <result column="rid" property="rid"></result>
     </resultMap>
 
     <select id="findByUser" resultMap="resultmap"  >
-    select u.*,s.id as headphoto,s.path from t_user u LEFT OUTER JOIN t_pic s ON u.headphoto = s.id  where
+
+  select s.*,u.*,t.* from  t_user u left  join  t_role t
+    on   u.flag=t.id
+  left  join  t_pic s  on s.id=u.headphoto where
      u.no = #{no}
     </select>
     <update id="update" parameterType="user">
@@ -52,7 +80,7 @@
     </update>
 
     <select id="selectUserByLoginName" parameterType="String" resultMap="resultmap">
-     select * FROM  t_user where name = #{name}
+     select * FROM  t_user where no = #{no}
     </select>
     <insert id="insertSelective" parameterType="user">
         insert into t_user
@@ -98,4 +126,113 @@
 
         </trim>
     </insert>
+
+    <select id="findAllRole" resultType="com.qfedu.pojo.Role">
+        select * from t_role
+    </select>
+    <select id="findPermsByName" parameterType="string" resultMap="VoMenuResult">
+        select a.id,a.title,a.aurl,c.id cid,c.title ctitle,c.aurl curl from t_authority a
+        INNER JOIN t_authority c
+        on a.id = c.parentId
+        INNER JOIN t_roleauthority ra
+        on ra.aid = c.id
+        INNER JOIN t_userrole ur
+        on ur.rid = ra.rid
+        INNER JOIN t_user u
+        on u.id = ur.uid
+        where u.id = #{id}
+    </select>
+    <select id="findLogList" parameterType="java.lang.String" resultType="com.qfedu.pojo.LoginInfo">
+        select log.* from t_loginlog log
+        inner join t_user u
+        on u.no = log.no
+        where u.no = #{no}
+    </select>
+
+    <select id="findAllAuthority" resultType="com.qfedu.pojo.Authority">
+        select * from t_authority
+    </select>
+
+    <select id="findAllParentAutho" resultType="com.qfedu.vo.VoMenu">
+        select id,aurl aUrl,title aTitle from t_authority where parentId = 0
+    </select>
+
+    <select id="chaAuthorityByParentId" parameterType="string" resultType="java.lang.Integer">
+        select id from t_authority where parentId = #{id}
+    </select>
+
+    <select id="chaAuthorityById" parameterType="string" resultType="com.qfedu.pojo.Authority">
+        select * from t_authority where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.qfedu.pojo.LoginInfo">
+        insert into t_loginlog values(null,#{ip},#{no},#{createtime},#{location})
+    </insert>
+
+    <insert id="authorityAdd" parameterType="com.qfedu.pojo.Authority">
+        insert into t_authority values(null,#{aicon},#{aurl},#{parentId},#{title},#{type})
+    </insert>
+
+    <insert id="updateRole">
+        insert into t_userrole values
+        <foreach collection="params.keys" item="key" index="index" open="" separator="," close="">
+            (#{params[${key}]},#{key})
+        </foreach>
+    </insert>
+
+    <update id="updateAutho" parameterType="com.qfedu.pojo.Authority">
+        update t_authority set aicon = #{aicon},
+        <if test="aurl != null and aurl != ''">
+            aurl = #{aurl},
+        </if>
+        <if test="parentId >= 0">
+            parentId = #{parentId},
+        </if>
+        <if test="title != null and title != ''">
+            title = #{title},
+        </if>
+        type = #{type}
+        where id = #{id}
+    </update>
+
+    <delete id="delRole" parameterType="java.lang.Integer">
+        delete from t_userrole where uid = #{id}
+    </delete>
+
+    <delete id="delUser" parameterType="java.lang.Integer">
+        delete from t_user where id = #{id}
+    </delete>
+
+    <delete id="delAuthorityByParentId" parameterType="string">
+        delete from t_authority where parentId = #{id}
+    </delete>
+
+    <delete id="delAuthorityById" parameterType="string">
+        delete from t_authority where id = #{id}
+    </delete>
+
+    <delete id="delRoleByAidList" parameterType="java.util.List">
+        delete from t_roleauthority where aid in
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="delRoleByAid" parameterType="string">
+        delete from t_roleauthority where aid = #{id}
+    </delete>
+    <!--查询用户角色-->
+    <select id="findAll" parameterType="java.lang.String"  resultMap="VoUserResult">
+        select u.id,u.no,u.name,u.flag,r.info role,r.id rid from t_role r
+        INNER JOIN t_userrole ur
+        on ur.rid = r.id
+        INNER JOIN t_user u
+        on u.id = ur.uid
+        <where>
+            <if test="no != null and no != ''">
+                and no = #{no}
+            </if>
+        </where>
+    </select>
+
 </mapper>

@@ -45,7 +45,7 @@
             <label class="layui-form-label">头像</label>
             <div class="layui-input-block">
                 <div class="layui-form-mid layui-word-aux">
-                    <img src="/media/images/22.jpg" style="width: 60px;height: 60px" />
+                    <img src="${user.userPic.path}" style="width: 60px;height: 60px" />
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">权限</label>
             <div class="layui-input-inline">
-                <div class="layui-form-mid layui-word-aux">管理</div>
+                <div class="layui-form-mid layui-word-aux">${user. userRole.info}</div>
             </div>
         </div>
     </form>

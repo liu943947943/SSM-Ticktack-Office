@@ -20,12 +20,28 @@
     <script src="/media/layui/layui.js"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
-
+        function edit(id) {
+            $.ajax({
+                url:"<%=basePath%>pos/selectPosById",
+                type:"post",
+                dataType:"json",
+                data:{id:id},
+                success:function (data) {
+                    $("#editModal").modal("show");
+                    $("#posName").val(data.posName);
+                    $("#myid").val(data.id);
+                    $("#imgs").attr("src",(data['shopPic'])['path']);
+                },
+                error:function () {
+                    alert("获取用户数据失败！");
+                }
+            });
+        }
     </script>
 </head>
 <body>
 <div class="layui-container" style="margin-top: 5px">
-    <form class="layui-form"id="myid" name="myid"   enctype="multipart/form-data" action="<%=basePath%>user/exitUser.do" method="post">
+    <form class="layui-form"id="myid" name="myid"  enctype="multipart/form-data" action="<%=basePath%>user/exitUser.do/${user.id}" method="post">
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
