@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.dao.StudentDao">
+    <resultMap id="BaseResultMap" type="com.qfedu.pojo.Student" >
+        <id column="no" property="no" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+        <result column="cardno" property="cardno" jdbcType="VARCHAR" />
+        <result column="school" property="school" jdbcType="VARCHAR" />
+        <result column="education" property="education" jdbcType="VARCHAR" />
+        <result column="gid" property="gid" jdbcType="INTEGER" />
+        <result column="flag" property="flag" jdbcType="INTEGER" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="qq" property="qq" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="introno" property="introno" jdbcType="VARCHAR" />
+        <result column="createdate" property="createdate" jdbcType="DATE" />
+        <result column="photo" property="photo" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.qfedu.vo.StudentVo" >
+        <id column="no" property="no" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+        <result column="cardno" property="cardno" jdbcType="VARCHAR" />
+        <result column="school" property="school" jdbcType="VARCHAR" />
+        <result column="education" property="education" jdbcType="VARCHAR" />
+        <result column="gname" property="gname" jdbcType="INTEGER" />
+        <result column="flag" property="flag" jdbcType="INTEGER" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="qq" property="qq" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="introno" property="introno" jdbcType="VARCHAR" />
+        <result column="createdate" property="createdate" jdbcType="DATE" />
+        <result column="photo" property="photo" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        no, name, sex, birthday, cardno, school, education, gid, flag, email, qq, phone,
+        introno, createdate, photo
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from t_student
+        where no = #{no,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from t_student
+        where no = #{no,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.qfedu.pojo.Student" >
+        insert into t_student (no, name, sex,
+        birthday, cardno, school,
+        education, gid, flag,
+        email, qq, phone, introno,
+        createdate, photo)
+        values (#{no,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+        #{birthday,jdbcType=DATE}, #{cardno,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR},
+        #{education,jdbcType=VARCHAR}, #{gid,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER},
+        #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{introno,jdbcType=VARCHAR},
+        #{createdate,jdbcType=DATE}, #{photo,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.qfedu.pojo.Student" >
+        insert into t_student
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="no != null" >
+                no,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="sex != null" >
+                sex,
+            </if>
+            <if test="birthday != null" >
+                birthday,
+            </if>
+            <if test="cardno != null" >
+                cardno,
+            </if>
+            <if test="school != null" >
+                school,
+            </if>
+            <if test="education != null" >
+                education,
+            </if>
+            <if test="gid != null" >
+                gid,
+            </if>
+            <if test="flag != null" >
+                flag,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="qq != null" >
+                qq,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="introno != null" >
+                introno,
+            </if>
+            <if test="createdate != null" >
+                createdate,
+            </if>
+            <if test="photo != null" >
+                photo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="no != null" >
+                #{no,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="cardno != null" >
+                #{cardno,jdbcType=VARCHAR},
+            </if>
+            <if test="school != null" >
+                #{school,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null" >
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="gid != null" >
+                #{gid,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null" >
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null" >
+                #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="introno != null" >
+                #{introno,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null" >
+                #{createdate,jdbcType=DATE},
+            </if>
+            <if test="photo != null" >
+                #{photo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.Student" >
+        update t_student
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null" >
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="cardno != null" >
+                cardno = #{cardno,jdbcType=VARCHAR},
+            </if>
+            <if test="school != null" >
+                school = #{school,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null" >
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="gid != null" >
+                gid = #{gid,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null" >
+                flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null" >
+                qq = #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="introno != null" >
+                introno = #{introno,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null" >
+                createdate = #{createdate,jdbcType=DATE},
+            </if>
+            <if test="photo != null" >
+                photo = #{photo,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where no = #{no,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.Student" >
+        update t_student
+        set name = #{name,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=VARCHAR},
+        birthday = #{birthday,jdbcType=DATE},
+        cardno = #{cardno,jdbcType=VARCHAR},
+        school = #{school,jdbcType=VARCHAR},
+        education = #{education,jdbcType=VARCHAR},
+        gid = #{gid,jdbcType=INTEGER},
+        flag = #{flag,jdbcType=INTEGER},
+        email = #{email,jdbcType=VARCHAR},
+        qq = #{qq,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        introno = #{introno,jdbcType=VARCHAR},
+        createdate = #{createdate,jdbcType=DATE},
+        photo = #{photo,jdbcType=VARCHAR}
+        where no = #{no,jdbcType=VARCHAR}
+    </update>
+    <select id="selectStudentByPage" resultMap="BaseResultMap2">
+        SELECT s.no,s.name,s.sex,s.birthday,s.cardno,s.school,s.education,d.`name` gname,s.email,s.qq,s.phone,s.introno,s.createdate,s.phone FROM t_student s
+        INNER JOIN t_course d
+        ON s.gid=d.id
+        where s.flag=1
+        limit #{page},#{limit}
+    </select>
+
+    <!-- 学生数量-->
+    <select id="selecStudentNum" resultType="int">
+        select
+        count(*)
+        from t_student
+        where flag=1
+    </select>
+
+    <!-- 批量插入-->
+    <insert id="addBatchStudent" parameterType="list">
+        insert into t_student(no,name,sex,birthday,cardno,school,education,gid,flag,email,qq,phone,introno,createdate) values
+        <foreach collection="list" item="stu" separator=",">
+            (#{stu.no},#{stu.name},#{stu.sex},#{stu.birthday},#{stu.cardno},#{stu.school},#{stu.education},#{stu.gid},#{stu.flag},#{stu.email},#{stu.             qq},#{stu.phone},#{stu.introno},#{stu.createdate})
+        </foreach>
+    </insert>
+</mapper>

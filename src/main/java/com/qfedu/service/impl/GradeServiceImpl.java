@@ -36,7 +36,11 @@ public class GradeServiceImpl implements GradeService {
 		// TODO 自动生成的方法存根
 		return gradeDao.insert(grade);
 	}
-	
-	
+
+	@Override
+	public List<Grade> selectAllGrade() {
+		return gradeDao.selectAllGrade();
+	}
+
 
 }
