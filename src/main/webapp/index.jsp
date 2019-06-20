@@ -51,12 +51,13 @@
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                  <img src="media/images/22.jpg" class="layui-nav-img">
+                   <img width=" 50px" height="50px" src="${user.userPic.path}"  class="layui-nav-img ">
+
                     ${user.name}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:showTab(1001,'userinfo.jsp','我的信息');">我的信息</a></dd><%--
-                    <dd><a href="javascript:showTab(1001,'staffupdate.html','更改头像');">更改头像</a></dd>--%>
+                    <dd><a href="javascript:showTab(1001,'userinfo.jsp','我的信息');">我的信息</a></dd>
+                    <dd><a href="javascript:showTab(1001,'userpicexit.jsp?id=${user.id}','更改头像');">更改头像</a></dd>
                     <dd><a href="javascript:showTab(1002,'userexit.jsp?id=${user.id}','修改密码');">修改密码</a></dd>
                 </dl>
             </li>
@@ -69,59 +70,50 @@
 
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-shrink="all" id="lm">
-              <%--  <li class="layui-nav-item">
-
-                    <a href="javascript:;" id="1"><i class="fa fa-shield"></i>&nbsp;权限管理</a>
-
-                    <dl class="layui-nav-child">
-
-                        <dd><a href="javascript:;" id="2" onclick="showTab(1,'/role/list/1','角色管理')">&nbsp;&nbsp;&nbsp;&nbsp;角色管理</a></dd>
-
-                        <dd><a href="javascript:;" id="2\" onclick="showTab(1,'/menu/list/1','菜单管理')">&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</a></dd>
-
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
-
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
-
-                    </dl>
-                </li>
---%>
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id=""><i class="fa fa-shield"></i>&nbsp;权限管理</a>
+                    <a href="javascript:;" id=><i class="fa fa-shield"></i>&nbsp;权限管理</a>
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/role/list/1','角色管理')">&nbsp;&nbsp;&nbsp;&nbsp;角色管理</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'userlimit.html','角色管理')">&nbsp;&nbsp;&nbsp;&nbsp;角色管理</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/menu/list/1','菜单管理')">&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'resourcelimit.html','菜单管理')">&nbsp;&nbsp;&nbsp;&nbsp;菜单管理</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
-
-                       <%-- <dd><a href="javascript:;" id="" onclick="showTab(1,'/user/list/1','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>--%>
+                        <dd><a href="javascript:;" onclick="showTab(1,'rolelimit.html','用户管理')">&nbsp;&nbsp;&nbsp;&nbsp;用户管理</a></dd>
 
                     </dl>
                 </li>
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id=""><i class="fa fa-sitemap"></i>&nbsp;部门管理</a>
+                    <a href="javascript:;" id=><i class="fa fa-sitemap"></i>&nbsp;部门管理</a>
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/departlist.html','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/departadd.html','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'departlist.jsp','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
+
+                        <dd><a href="javascript:;"  onclick="showTab(1,'departadd.jsp','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
+
+                        <dd><a href="javascript:;" id= onclick="showTab(1,'/departlist.html','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
+
+                        <dd><a href="javascript:;" id= onclick="showTab(1,'/departadd.html','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
+
 
                     </dl>
                 </li>
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id=""><i class="layui-icon layui-icon-user"></i>&nbsp;员工管理</a>
+                    <a href="javascript:;" id=><i class="layui-icon layui-icon-user"></i>&nbsp;员工管理</a>
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/stafflist.jsp','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
 
-                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/staffadd.html','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
+                        <dd><a href="javascript:;" id onclick="showTab(1,'/emp/list/1','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
+
+                        <dd><a href="javascript:;" id onclick="showTab(1,'/stafflist.jsp','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
+
+
+                        <dd><a href="javascript:;" id onclick="showTab(1,'/staffadd.html','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
 
                     </dl>
                 </li>
@@ -132,9 +124,9 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;"id="" onclick="showTab(1,'/courseadd.html','专业新增')">&nbsp;&nbsp;&nbsp;&nbsp;专业新增</a></dd>
+                        <dd><a href="javascript:;" id= onclick="showTab(1,'/courseadd.jsp','专业新增')">&nbsp;&nbsp;&nbsp;&nbsp;专业新增</a></dd>
 
-                        <dd><a href="javascript:;"id="" onclick="showTab(1,'/courselist.html','专业列表')">&nbsp;&nbsp;&nbsp;&nbsp;专业列表</a></dd>
+                        <dd><a href="javascript:;" id= onclick="showTab(1,'/course/list/1','专业列表')">&nbsp;&nbsp;&nbsp;&nbsp;专业列表</a></dd>
 
                     </dl>
                 </li>
@@ -158,11 +150,11 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" onclick="showTab(1,'/studentadd.html','学员新增')">&nbsp;&nbsp;&nbsp;&nbsp;学员新增</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'/student/goinsert','学员新增')">&nbsp;&nbsp;&nbsp;&nbsp;学员新增</a></dd>
 
-                        <dd><a href="javascript:;" onclick="showTab(1,'/studentbatch.html','学员导入')">&nbsp;&nbsp;&nbsp;&nbsp;学员导入</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'/student/goImport','学员导入')">&nbsp;&nbsp;&nbsp;&nbsp;学员导入</a></dd>
 
-                        <dd><a href="javascript:;"  onclick="showTab(1,'/studentlist.html','学员列表')">&nbsp;&nbsp;&nbsp;&nbsp;学员列表</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'/student/list/1','学员列表')">&nbsp;&nbsp;&nbsp;&nbsp;学员列表</a></dd>
 
                     </dl>
                 </li>
@@ -214,7 +206,7 @@
             $("#lm").append(s);
             element.render();
         });
-        showTab(20000,"main.html","首页");
+        showTab(20000,"main.jsp?id=${user.no}","首页");
     });
     var tid=-1;
     function showTab(id,u,n) {
