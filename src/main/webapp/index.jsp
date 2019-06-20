@@ -86,34 +86,24 @@
                 </li>
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id=><i class="fa fa-sitemap"></i>&nbsp;部门管理</a>
+                    <a href="javascript:;" id=""><i class="fa fa-sitemap"></i>&nbsp;部门管理</a>
                     <dl class="layui-nav-child">
 
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/departlist.html','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
 
-                        <dd><a href="javascript:;"  onclick="showTab(1,'departlist.jsp','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
-
-                        <dd><a href="javascript:;"  onclick="showTab(1,'departadd.jsp','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
-
-                        <dd><a href="javascript:;" id= onclick="showTab(1,'/departlist.html','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
-
-                        <dd><a href="javascript:;" id= onclick="showTab(1,'/departadd.html','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
-
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/departadd.html','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
 
                     </dl>
                 </li>
                 <li class="layui-nav-item">
 
-                    <a href="javascript:;" id=><i class="layui-icon layui-icon-user"></i>&nbsp;员工管理</a>
+                    <a href="javascript:;" id=""><i class="layui-icon layui-icon-user"></i>&nbsp;员工管理</a>
 
                     <dl class="layui-nav-child">
 
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/stafflist.jsp','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
 
-                        <dd><a href="javascript:;" id onclick="showTab(1,'/emp/list/1','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
-
-                        <dd><a href="javascript:;" id onclick="showTab(1,'/stafflist.jsp','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
-
-
-                        <dd><a href="javascript:;" id onclick="showTab(1,'/staffadd.html','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
+                        <dd><a href="javascript:;" id="" onclick="showTab(1,'/staffadd.html','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
 
                     </dl>
                 </li>
@@ -124,9 +114,9 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" id= onclick="showTab(1,'/courseadd.jsp','专业新增')">&nbsp;&nbsp;&nbsp;&nbsp;专业新增</a></dd>
+                        <dd><a href="javascript:;"id="" onclick="showTab(1,'/courseadd.html','专业新增')">&nbsp;&nbsp;&nbsp;&nbsp;专业新增</a></dd>
 
-                        <dd><a href="javascript:;" id= onclick="showTab(1,'/course/list/1','专业列表')">&nbsp;&nbsp;&nbsp;&nbsp;专业列表</a></dd>
+                        <dd><a href="javascript:;"id="" onclick="showTab(1,'/courselist.html','专业列表')">&nbsp;&nbsp;&nbsp;&nbsp;专业列表</a></dd>
 
                     </dl>
                 </li>
@@ -150,15 +140,16 @@
 
                     <dl class="layui-nav-child">
 
-                        <dd><a href="javascript:;" onclick="showTab(1,'/student/goinsert','学员新增')">&nbsp;&nbsp;&nbsp;&nbsp;学员新增</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'/studentadd.html','学员新增')">&nbsp;&nbsp;&nbsp;&nbsp;学员新增</a></dd>
 
-                        <dd><a href="javascript:;" onclick="showTab(1,'/student/goImport','学员导入')">&nbsp;&nbsp;&nbsp;&nbsp;学员导入</a></dd>
+                        <dd><a href="javascript:;" onclick="showTab(1,'/studentbatch.html','学员导入')">&nbsp;&nbsp;&nbsp;&nbsp;学员导入</a></dd>
 
-                        <dd><a href="javascript:;"  onclick="showTab(1,'/student/list/1','学员列表')">&nbsp;&nbsp;&nbsp;&nbsp;学员列表</a></dd>
+                        <dd><a href="javascript:;"  onclick="showTab(1,'/studentlist.html','学员列表')">&nbsp;&nbsp;&nbsp;&nbsp;学员列表</a></dd>
 
                     </dl>
                 </li>
 
+            </ul>
             </ul>
         </div>
     </div>
